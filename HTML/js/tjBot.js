@@ -40,7 +40,7 @@ function runLights(_pattern)
 {
     var options = {};
     options.pattern = _pattern;
-    $.when($.post('tjBot/lights', options)).done(function(_res)
+    $.when($.post('tjBot/cycleLight', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 
@@ -48,7 +48,7 @@ function displayLightOptions()
 {
     // replace this with an html page to select color pattern
     var patterns = {"patterns": [{"color": "white", "duration": "2"}, {"color": "red", "duration": "1"}, {"color": "yellow", "duration": "2"}, {"color": "green", "duration": "1"}, {"color": "purple", "duration": "2"} ]};
-    runlights(patterns);
+    runLights(patterns);
 }
 
 function runWave()

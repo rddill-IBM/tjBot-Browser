@@ -39,7 +39,7 @@ var twitter = new Twitter({
 var TWEETS = [];
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
-var tjConversation = new TJBot(['microphone', 'speaker', 'servo', 'led'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
+var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 
 
 
@@ -71,9 +71,9 @@ exports.cycleLight = function(req, res, next)
     var _cur = 0;
     pattern.patterns.forEach(function(_pattern) {
         _cur++;
-         console.log('Processing '+_cur+' of '+_len+' : '+_pattern.color);
+         console.log('Processing '+_cur+' of '+_len+' : '+_pattern.color+' for '+_pattern.duration+' seconds');
          tjLED.shine(_pattern.color);
-         sleep.sleep(_pattern.duration);
+         sleep.sleep(parseInt(_pattern.duration, 10));
      });
      tjLED.shine('blue');
      res.send({"results": "Color Cycle Complete."});
