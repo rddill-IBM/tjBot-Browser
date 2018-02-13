@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="title">
+    <h1>Bob's Resume Chat Bot</h1>
+    <p>What would you like to know? You are interviewing Bob for a new job. Ask Bob questions about his resume in the "Type something" text box below. On the right you can rate how well the chatbot answered your question by selecting a rating and clicking "Train"</p>
+  </div>
+  <div class="scrollingPaneLeft" id="conv_scroll">
+    <div id="conversation">
+    </div>
+  </div>
+  <div class="scrollingPaneRight" id="clarify">
+    <table width="100%">
+      <tr><td width="30%">You Said:</td><td id="msg" class="train_msg"></td></tr>
+      <tr><td>I responded:</td><td id="resp" class="train_resp"></td></tr>
+      <tr><td>Was this response relevant?</td>
+        <td>
+          <span class="glyphicon glyphicon-question-sign" title="The options are Yes, No and Neutral. If my answer was on target, please select yes. If my response indicated lack of understanding, or misunderstanding, please select No. Selecting No will cause a text box to appear where you can tell me what I was supposed to understand."></span>
+          <select id="relevance"><option value=0>Neutral</option><option value=1>Yes</option><option value=2>No</option></select></td></tr>
+      <tr id="trainRow" class="acc_body off">
+        <td>
+            <span class="glyphicon glyphicon-question-sign" title="Please tell me what you were looking for, so that I can learn. Learning takes a day or so."></span>
+            Please tell me about what you were asking so that I can learn</td><td><input id="trainInfo" class="input showfocus wide" width="90%",
+        placeholder="Type Key Idea" type="text"></td>
+      </tr>
+    </table>
+    <button class="wide" id="train">Train</button>
+  </div>
+      <input id="textInput" class=" showfocus input lockBottom " ,
+        placeholder="Type something" type="text", onkeypress="detectKey(event, 'getMessage')">
+</div>
