@@ -18,7 +18,7 @@ var config = require("../../env.json");
 var format = require('date-format');
 var fs = require('fs-extra');
 var path = require('path');
-const util = Object.create(require('./Z2B_Utilities').Z2B_Utility);
+var util = Object.create(require('./Z2B_Utilities').Z2B_Utility);
 var myDB = require('./cloudant_utils');
 myDB.authenticate(myDB.create, '');
 
@@ -31,7 +31,6 @@ var conversation = new Watson({
   version_date: '2016-09-20',
   version: 'v1'
 });
-console.log(config.conversations);
 
 /**
  * response connects to the previously defined conversation server and sends in the input and context information from the browser

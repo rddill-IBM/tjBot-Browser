@@ -21,6 +21,7 @@ var lights;
 var wave;
 var sentiment;
 var conversation;
+var flasher;
 var rh_panel;
 
 function initTJBot()
@@ -30,10 +31,12 @@ var lights = $('#lights');
     sentiment = $('#sentiment');
     conversation = $('#conversation');
     rh_panel = $('#rh_panel');
+    flasher = $('#flasher');
     lights.on('click', function(){displayLightOptions();});
     wave.on('click', function(){runWave();});
     sentiment.on('click', function(){runSentiment();});
     conversation.on('click', function(){runConversation();});
+    setTimeout(function (){console.log('stopping flasher'); flasher.src='./images/flasher.png'}, 3000)
 }
 
 function runLights(_pattern)
