@@ -40,8 +40,8 @@ function runLights(_pattern)
 {
     var options = {};
     options.pattern = _pattern;
-    $.when($.post('tjbot/lights', options)).done(function(_res)
-    {rh_panel.empty(); th_panel.append(_res.results); });
+    $.when($.post('tjBot/lights', options)).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 
 function displayLightOptions()
@@ -54,18 +54,18 @@ function displayLightOptions()
 function runWave()
 {
     var options = {};
-    $.when($.post('tjbot/wave', options)).done(function(_res)
-    {rh_panel.empty(); th_panel.append(_res.results); });
+    $.when($.post('tjBot/wave', options)).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runConversation()
 {
     var options = {};
-    $.when($.post('tjbot/conversation', options)).done(function(_res)
-    {rh_panel.empty(); th_panel.append(_res.results); });
+    $.when($.post('tjBot/conversation', options)).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runSentiment()
 {
     var options = {};
-    $.when($.post('tjbot/sentiment', options)).done(function(_res)
-    {rh_panel.empty(); th_panel.append(_res.results); });
+    $.when($.post('tjBot/sentiment', options)).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
 }

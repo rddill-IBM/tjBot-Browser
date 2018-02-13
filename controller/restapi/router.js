@@ -50,7 +50,7 @@ router.post( '/api/response', conversations.response);
 router.post( '/api/train', conversations.train);
 router.get( '/api/getAllRecords', conversations.getAllRecords);
 
-router.post('tjBot/wave', tjBot.wave);
-router.post('tjBot/cycleLight', tjBot.cycleLight);
-router.post('tjBot/sentiment', tjBot.sentiment);
-router.post('tjBot/conversation', tjBot.conversation);
+router.post('/tjBot/wave', tjBot.wave);
+router.post('/tjBot/cycleLight', tjBot.cycleLight);
+router.post('/tjBot/sentiment', tjBot.sentiment);
+router.post('/tjBot/conversation', tjBot.conversation);

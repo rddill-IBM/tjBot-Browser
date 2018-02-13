@@ -27,7 +27,7 @@ var config = require('../../env.json');
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
 var tjLED = new TJBot(['led'], {log: {level: 'debug'}}, {});
 var twitterCreds = config.twitter;
-var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, twitterCreds);
+var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, config);
 var SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword;
 var SENTIMENT_ANALYSIS_FREQUENCY_MSEC = twitterCreds.sentiment_analysis_frequency_sec * 1000;
 var twitter = new Twitter({
@@ -51,6 +51,7 @@ var tjConversation = new TJBot(['microphone', 'speaker', 'servo', 'led'], {log: 
  */
 exports.wave = function(req, res, next)
 {
+    console.log("wave entered");
     tjServo.wave();
     res.send({"results": "wave complete"});
 }
@@ -74,7 +75,7 @@ exports.cycleLight = function(req, res, next)
          tjLED.shine(_pattern.color);
          sleep.sleep(_pattern.duration);
      });
-     tj.shine('blue');
+     tjLED.shine('blue');
      res.send({"results": "Color Cycle Complete."});
 }
 /**
@@ -136,7 +137,7 @@ function shineFromTweetSentiment() {
         var text = TWEETS.join(' ');
         console.log("Analyzing tone of " + TWEETS.length + " tweets");
 
-        tj.analyzeTone(text).then(function(tone) {
+        tjSentiment.analyzeTone(text).then(function(tone) {
             tone.document_tone.tone_categories.forEach(function(category) {
                 if (category.category_id == "emotion_tone") {
                     // find the emotion with the highest confidence
@@ -161,19 +162,19 @@ function shineForEmotion(emotion) {
 
     switch (emotion) {
     case 'anger':
-        tj.shine('red');
+        tjSentiment.shine('red');
         break;
     case 'joy':
-        tj.shine('yellow');
+        tjSentiment.shine('yellow');
         break;
     case 'fear':
-        tj.shine('magenta');
+        tjSentiment.shine('magenta');
         break;
     case 'disgust':
-        tj.shine('green');
+        tjSentiment.shine('green');
         break;
     case 'sadness':
-        tj.shine('blue');
+        tjSentiment.shine('blue');
         break;
     default:
         break;
@@ -189,11 +190,11 @@ function shineForEmotion(emotion) {
 exports.conversation = function(req, res, next)
 {
     res.send({"results": "starting conversation"});
-    tj.listen(function(msg) {
+    tjConversation.listen(function(msg) {
             // send to the conversation service
-            tj.converse(WORKSPACEID, msg, function(response) {
+            tjConversation.converse(WORKSPACEID, msg, function(response) {
                 // speak the result
-                tj.speak(response.description);
+                tjConversastion.speak(response.description);
             });
     });   
 }
