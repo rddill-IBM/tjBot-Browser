@@ -36,7 +36,7 @@ var lights = $('#lights');
     wave.on('click', function(){runWave();});
     sentiment.on('click', function(){runSentiment();});
     conversation.on('click', function(){runConversation();});
-    setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('./images/flasher.png'); }, 3000)
+    setTimeout(function (){console.log('stopping flasher'); flasher.empty();  }, 3000)
 }
 
 function runLights(_pattern)
