@@ -17,14 +17,19 @@
 ** z2c-speech.js
 */
 
-var lights = $('#lights');
-var wave = $('#wave');
-var sentiment = $('#sentiment');
-var conversation = $('#conversation');
-var rh_panel = $('#rh_panel');
+var lights;
+var wave;
+var sentiment;
+var conversation;
+var rh_panel;
 
 function initTJBot()
 {
+var lights = $('#lights');
+    wave = $('#wave');
+    sentiment = $('#sentiment');
+    conversation = $('#conversation');
+    rh_panel = $('#rh_panel');
     lights.on('click', function(){displayLightOptions();});
     wave.on('click', function(){runWave();});
     sentiment.on('click', function(){runSentiment();});

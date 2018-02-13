@@ -26,10 +26,10 @@ var Twitter = require('twitter');
 var config = require('../../env.json');
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
 var tjLED = new TJBot(['led'], {log: {level: 'debug'}}, {});
-var twitterCreds = config.twitter.credentials;
+var twitterCreds = config.twitter;
 var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, twitterCreds);
-var SENTIMENT_KEYWORD = twitter.sentiment_keyword;
-var SENTIMENT_ANALYSIS_FREQUENCY_MSEC = twitter.sentiment_analysis_frequency_sec * 1000;
+var SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword;
+var SENTIMENT_ANALYSIS_FREQUENCY_MSEC = twitterCreds.sentiment_analysis_frequency_sec * 1000;
 var twitter = new Twitter({
     consumer_key: twitterCreds.consumer_key,
     consumer_secret: twitterCreds.consumer_secret,

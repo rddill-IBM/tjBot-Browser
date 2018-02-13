@@ -21,6 +21,7 @@ var auth = require('./features/authenticate');
 var images = require('./features/images');
 var conversations = require('./features/conversations');
 var format = require('date-format');
+var tjBot = require('./features/tjBot');
 
 var count = 0;
 router.use(function(req, res, next) {
