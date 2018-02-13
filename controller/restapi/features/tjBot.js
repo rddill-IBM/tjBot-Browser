@@ -195,7 +195,7 @@ exports.conversation = function(req, res, next)
             // send to the conversation service
             tjConversation.converse(WORKSPACEID, msg, function(response) {
                 // speak the result
-                tjConversastion.speak(response.description);
+                tjConversation.speak(response.description);
             });
     });   
 }
