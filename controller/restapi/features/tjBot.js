@@ -24,10 +24,13 @@ var TJBot = require('tjbot');
 var sleep = require('sleep');
 var Twitter = require('twitter');
 var config = require('../../env.json');
+
+var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
 var tjLED = new TJBot(['led'], {log: {level: 'debug'}}, {});
-var twitterCreds = config.twitter;
 var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, config);
+
+var twitterCreds = config.twitter;
 var SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword;
 var SENTIMENT_ANALYSIS_FREQUENCY_MSEC = twitterCreds.sentiment_analysis_frequency_sec * 1000;
 var twitter = new Twitter({
@@ -40,7 +43,6 @@ var TWEETS = [];
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
-var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 
 
 
