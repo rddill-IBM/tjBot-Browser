@@ -39,6 +39,7 @@ var twitter = new Twitter({
 var TWEETS = [];
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
+var WORKSPACEID = config.conversations.workspace;
 var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 
 
