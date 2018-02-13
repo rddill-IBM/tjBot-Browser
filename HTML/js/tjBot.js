@@ -36,13 +36,6 @@ var lights = $('#lights');
     conversation.on('click', function(){runConversation();});
 }
 
-function displayLightOptions()
-{
-    // replace this with an html page to select color pattern
-    var patterns = {"patterns": [{"color": "white", "duration": "2"}, {"color": "red", "duration": "1"}, {"color": "yellow", "duration": "2"}, {"color": "green", "duration": "1"}, {"color": "purple", "duration": "2"} ]};
-    runlights(patterns);
-}
-
 function runLights(_pattern)
 {
     var options = {};
@@ -50,6 +43,14 @@ function runLights(_pattern)
     $.when($.post('tjbot/lights', options)).done(function(_res)
     {rh_panel.empty(); th_panel.append(_res.results); });
 }
+
+function displayLightOptions()
+{
+    // replace this with an html page to select color pattern
+    var patterns = {"patterns": [{"color": "white", "duration": "2"}, {"color": "red", "duration": "1"}, {"color": "yellow", "duration": "2"}, {"color": "green", "duration": "1"}, {"color": "purple", "duration": "2"} ]};
+    runlights(patterns);
+}
+
 function runWave()
 {
     var options = {};
