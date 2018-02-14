@@ -130,6 +130,7 @@ exports.sentiment = function(req, res, next)
         // perform sentiment analysis every N seconds
         setInterval(function() {
             console.log("Performing sentiment analysis of the tweets");
+            tjSentiment.pulse('yellow', 1);
             shineFromTweetSentiment();
         }, SENTIMENT_ANALYSIS_FREQUENCY_MSEC);
     
@@ -139,6 +140,7 @@ function shineFromTweetSentiment() {
     // is probably not enough.
     if (TWEETS.length > 5) {
         var text = TWEETS.join(' ');
+        tjSentiment.pulse('green', 0.5);
         console.log("Analyzing tone of " + TWEETS.length + " tweets");
 
         tjSentiment.analyzeTone(text).then(function(tone) {
