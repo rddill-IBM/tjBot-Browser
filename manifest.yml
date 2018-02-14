@@ -3,6 +3,6 @@ applications:
   memory: 96M
   instances: 1
   domain: mybluemix.net
-  name: Z2C 10.1 Bob's Resume Chat Bot
-  host: bobsresume
+  name: TJBot Web App Controller
+  host: TJBotWeb
   disk_quota: 1024M

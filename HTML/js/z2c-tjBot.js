@@ -46,7 +46,7 @@ function runLights(_pattern)
 {
     var options = {};
     options.pattern = _pattern;
-    $.when($.post('tjBot/cycleLight', options)).done(function(_res)
+    $.when($.post('/tjBot/cycleLight', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 
@@ -60,32 +60,32 @@ function displayLightOptions()
 function runWave()
 {
     var options = {};
-    $.when($.post('tjBot/wave', options)).done(function(_res)
+    $.when($.post('/tjBot/wave', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runConversation()
 {
     var options = {};
-    $.when($.post('tjBot/conversation', options)).done(function(_res)
+    $.when($.post('/tjBot/conversation', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runFactoid()
 {
     var options = {};
-    $.when($.post('tjBot/factoid', options)).done(function(_res)
+    $.when($.post('/tjBot/factoid', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runSentiment()
 {
     var options = {};
     sentiment_icon.empty(); sentiment_icon.append('<img src="./icons/stop.png" width="200">')
-    $.when($.post('tjBot/sentiment', options)).done(function(_res)
+    $.when($.post('/tjBot/sentiment', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function cancelSentiment()
 {
     var options = {};
-    $.when($.post('tjBot/cancelSentiment', options)).done(function(_res)
+    $.when($.post('/tjBot/cancelSentiment', options)).done(function(_res)
     {
         sentiment_icon.empty(); sentiment_icon.append('<img src="./images/sentiment.png" width="200">')
         rh_panel.empty(); rh_panel.append(_res.results); });
