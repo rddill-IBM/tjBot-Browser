@@ -43,6 +43,7 @@ var TWEETS = [];
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
+var WORKSPACEID = config.conversations.factoidWorkspace;
 
 
 
@@ -196,6 +197,24 @@ exports.conversation = function(req, res, next)
     tjConversation.listen(function(msg) {
             // send to the conversation service
             tjConversation.converse(WORKSPACEID, msg, function(response) {
+                // speak the result
+                tjConversation.speak(response.description);
+            });
+    });   
+}
+
+/**
+ * factoid - load the factoid conversation to tjBot
+ * @param {*} req NodeJS request object. Contains information sent to this function
+ * @param {*} res NodeJS response object. Used exactly once in this function to respond to request
+ * @param {*} next NodeJS next object. Used to pass processing on to next logical nodeJS service instead of "responding" to request
+ */
+exports.conversation = function(req, res, next)
+{
+    res.send({"results": "starting conversation"});
+    tjConversation.listen(function(msg) {
+            // send to the conversation service
+            tjConversation.converse(FACTOID, msg, function(response) {
                 // speak the result
                 tjConversation.speak(response.description);
             });
