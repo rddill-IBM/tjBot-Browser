@@ -123,6 +123,7 @@ exports.sentiment = function(req, res, next)
 {
     res.send({"results": "Request to perform sentiment analysis received."});
         // monitor twitter
+        console.log('monitoring twitter');
         twitter.stream('statuses/filter', {track: SENTIMENT_KEYWORD }, function(stream) {
             stream.on('data', function(event) {
                 if (event && event.text) {
@@ -148,7 +149,7 @@ exports.sentiment = function(req, res, next)
     
         // perform sentiment analysis every N seconds
         intervalID = setInterval(function() {
-            console.log("Performing sentiment analysis of the tweets");
+            console.log("Performing sentiment analysis of the tweets, pulse light yellow, 1 second interval");
             tjSentiment.pulse('yellow', 1);
             shineFromTweetSentiment();
         }, SENTIMENT_ANALYSIS_FREQUENCY_MSEC);
@@ -160,7 +161,7 @@ function shineFromTweetSentiment() {
     if (TWEETS.length > 5) {
         var text = TWEETS.join(' ');
         tjSentiment.pulse('green', 0.5);
-        console.log("Analyzing tone of " + TWEETS.length + " tweets");
+        console.log("Analyzing tone of " + TWEETS.length + " tweets. Pulsing light green, 0.5 second interval");
 
         tjSentiment.analyzeTone(text).then(function(tone) {
             tone.document_tone.tone_categories.forEach(function(category) {
