@@ -24,6 +24,7 @@ var TJBot = require('tjbot');
 var sleep = require('sleep');
 var Twitter = require('twitter');
 var config = require('../../env.json');
+var intervalID;
 
 var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
@@ -58,6 +59,24 @@ exports.wave = function(req, res, next)
     console.log("wave entered");
     tjServo.wave();
     res.send({"results": "wave complete"});
+}
+
+/**
+ * wave - Make the TJBot arm wave
+ * @param {*} req NodeJS request object. Contains information sent to this function
+ * @param {*} res NodeJS response object. Used exactly once in this function to respond to request
+ * @param {*} next NodeJS next object. Used to pass processing on to next logical nodeJS service instead of "responding" to request
+ */
+exports.cancelSentiment = function(req, res, next)
+{
+    if (typeof((intervalID !== "undefined") && intervalID !== null))
+    {
+        clearInterval(intervalID); intervalID = null;
+        res.send({"results": "Sentiment processing cancelled."});
+    }else
+    {
+        res.send({"results": "Sentiment processing was not active."});
+    }
 }
 
 /**
@@ -128,7 +147,7 @@ exports.sentiment = function(req, res, next)
         });
     
         // perform sentiment analysis every N seconds
-        setInterval(function() {
+        intervalID = setInterval(function() {
             console.log("Performing sentiment analysis of the tweets");
             tjSentiment.pulse('yellow', 1);
             shineFromTweetSentiment();

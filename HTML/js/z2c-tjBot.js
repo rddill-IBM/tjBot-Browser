@@ -19,7 +19,7 @@
 
 var lights;
 var wave;
-var sentiment;
+var sentiment, sentiment_icon;
 var conversation, factoid;
 var flasher;
 var rh_panel;
@@ -30,6 +30,7 @@ function initTJBot()
     wave = $('#wave');
     factoid = $('#factoid');
     sentiment = $('#sentiment');
+    sentiment_icon = $('#sentiment_icon');
     conversation = $('#conversation');
     rh_panel = $('#rh_panel');
     flasher = $('#flasher');
@@ -77,6 +78,15 @@ function runFactoid()
 function runSentiment()
 {
     var options = {};
+    sentiment_icon.empty(); sentiment_icon.append('<img src="./icons/stop.png" width="200">')
     $.when($.post('tjBot/sentiment', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
+}
+function cancelSentiment()
+{
+    var options = {};
+    $.when($.post('tjBot/cancelSentiment', options)).done(function(_res)
+    {
+        sentiment_icon.empty(); sentiment_icon.append('<img src="./images/sentiment.png" width="200">')
+        rh_panel.empty(); rh_panel.append(_res.results); });
 }
