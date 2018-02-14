@@ -46,7 +46,7 @@ var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
 var WORKSPACEID = config.conversations.factoidWorkspace;
-var tjColors = tjColorControlshineColors();
+var tjColors = tjColorControl.shineColors();
 var colors = {}; tjColors.forEach(function(color) { colors[color] = 1; });
 
 /**
@@ -110,7 +110,7 @@ exports.cycleLight = function(req, res, next)
  */
 exports.getColors = function(req, res, next)
 {
-    var _colors = tjColorControlshineColors();
+    var _colors = tjColorControl.shineColors();
     res.send({"colors": _colors});
 }
 
@@ -253,7 +253,7 @@ exports.factoid = function(req, res, next)
 exports.controlLED = function(req, res, next)
 {
     res.send({"results": "starting controlLED"});
-    tjColorControllisten(function(msg) {
+    tjColorControl.listen(function(msg) {
         var containsTurn = msg.indexOf("turn") >= 0;
         var containsChange = msg.indexOf("change") >= 0;
         var containsSet = msg.indexOf("set") >= 0;
@@ -267,7 +267,7 @@ exports.controlLED = function(req, res, next)
                 var word = words[i];
                 if (colors[word] != undefined || word == "on" || word == "off") {
                     // yes!
-                    tjColorControlshine(word);
+                    tjColorControl.shine(word);
                     break;
                 }
             }
@@ -279,7 +279,7 @@ exports.controlLED = function(req, res, next)
                 {
                     var randIdx = Math.floor(Math.random() * tjColors.length);
                     var randColor = tjColors[randIdx];
-                    tjColorControlshine(randColor);
+                    tjColorControl.shine(randColor);
                 }, i * 250);
             }
         }
