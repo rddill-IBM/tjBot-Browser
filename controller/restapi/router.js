@@ -56,3 +56,4 @@ router.post('/tjBot/sentiment', tjBot.sentiment);
 router.post('/tjBot/conversation', tjBot.conversation);
 router.post('/tjBot/factoid', tjBot.factoid);
 router.post('/tjBot/cancelSentiment', tjBot.cancelSentiment);
+router.post('/tjBot/controlLED', tjBot.controlLED);

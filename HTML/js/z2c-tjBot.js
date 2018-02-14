@@ -17,7 +17,7 @@
 ** z2c-speech.js
 */
 
-var lights;
+var lights, LEDcolor;
 var wave;
 var sentiment, sentiment_icon;
 var conversation, factoid;
@@ -35,11 +35,13 @@ function initTJBot()
     conversation = $('#conversation');
     rh_panel = $('#rh_panel');
     flasher = $('#flasher');
+    LEDcolor = $('#color');
     lights.on('click', function(){displayLightOptions();});
     wave.on('click', function(){runWave();});
     sentiment.on('click', function(){runSentiment();});
     conversation.on('click', function(){runConversation();});
-    conversation.on('click', function(){runFactoid();});
+    // factoid.on('click', function(){runFactoid();});
+    LEDcolor.on('click', function(){runControlLED();});
     setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('<img src="./images/flasher.jpg" width="200">') }, 3000)
 }
 
@@ -74,6 +76,12 @@ function runFactoid()
 {
     var options = {};
     $.when($.post('/tjBot/factoid', options)).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
+}
+function runControlLED()
+{
+    var options = {};
+    $.when($.post('/tjBot/controlLED', options)).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 }
 function runSentiment()

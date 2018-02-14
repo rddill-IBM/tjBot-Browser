@@ -30,6 +30,7 @@ var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level:
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
 var tjLED = new TJBot(['led'], {log: {level: 'debug'}}, {});
 var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, config);
+var tjColorControl = new TJBot(['led', 'microphone'], {log: {level: 'verbose'}}, config);
 
 var twitterCreds = config.twitter;
 var SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword;
@@ -45,8 +46,8 @@ var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
 var WORKSPACEID = config.conversations.factoidWorkspace;
-
-
+var tjColors = tj.shineColors();
+var colors = {}; tjColors.forEach(function(color) { colors[color] = 1; });
 
 /**
  * wave - Make the TJBot arm wave
@@ -233,7 +234,7 @@ exports.conversation = function(req, res, next)
  */
 exports.factoid = function(req, res, next)
 {
-    res.send({"results": "starting conversation"});
+    res.send({"results": "starting factoid"});
     tjConversation.listen(function(msg) {
             // send to the conversation service
             tjConversation.converse(FACTOID, msg, function(response) {
@@ -242,3 +243,45 @@ exports.factoid = function(req, res, next)
             });
     });   
 }
+
+/**
+ * factoid - load the factoid conversation to tjBot
+ * @param {*} req NodeJS request object. Contains information sent to this function
+ * @param {*} res NodeJS response object. Used exactly once in this function to respond to request
+ * @param {*} next NodeJS next object. Used to pass processing on to next logical nodeJS service instead of "responding" to request
+ */
+exports.controlLED = function(req, res, next)
+{
+    res.send({"results": "starting controlLED"});
+    tj.listen(function(msg) {
+        var containsTurn = msg.indexOf("turn") >= 0;
+        var containsChange = msg.indexOf("change") >= 0;
+        var containsSet = msg.indexOf("set") >= 0;
+        var containsLight = msg.indexOf("the light") >= 0;
+        var containsDisco = msg.indexOf("disco") >= 0;
+    
+        if ((containsTurn || containsChange || containsSet) && containsLight) {
+            // was there a color uttered?
+            var words = msg.split(" ");
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                if (colors[word] != undefined || word == "on" || word == "off") {
+                    // yes!
+                    tj.shine(word);
+                    break;
+                }
+            }
+        } else if (containsDisco) 
+        {
+            for (i = 0; i < 30; i++) 
+            {
+                setTimeout(function() 
+                {
+                    var randIdx = Math.floor(Math.random() * tjColors.length);
+                    var randColor = tjColors[randIdx];
+                    tj.shine(randColor);
+                }, i * 250);
+            }
+        }
+    });
+    }
