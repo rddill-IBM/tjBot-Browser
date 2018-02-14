@@ -209,7 +209,7 @@ exports.conversation = function(req, res, next)
  * @param {*} res NodeJS response object. Used exactly once in this function to respond to request
  * @param {*} next NodeJS next object. Used to pass processing on to next logical nodeJS service instead of "responding" to request
  */
-exports.conversation = function(req, res, next)
+exports.factoid = function(req, res, next)
 {
     res.send({"results": "starting conversation"});
     tjConversation.listen(function(msg) {
