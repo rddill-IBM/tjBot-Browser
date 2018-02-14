@@ -23,6 +23,7 @@ var sentiment, sentiment_icon;
 var conversation, factoid;
 var flasher;
 var rh_panel;
+var bSentiment = false;
 
 function initTJBot()
 {
@@ -77,10 +78,14 @@ function runFactoid()
 }
 function runSentiment()
 {
-    var options = {};
-    sentiment_icon.empty(); sentiment_icon.append('<img src="./icons/stop.png" width="200">')
-    $.when($.post('/tjBot/sentiment', options)).done(function(_res)
-    {rh_panel.empty(); rh_panel.append(_res.results); });
+    if (!bSentiment)
+    {
+        var options = {};
+        sentiment_icon.empty(); sentiment_icon.append('<img src="./icons/stop.png" width="200">')
+        $.when($.post('/tjBot/sentiment', options)).done(function(_res)
+        {rh_panel.empty(); rh_panel.append(_res.results); bSentiment = true;});
+    }else
+    {cancelSentiment(); bSentiment=false;}
 }
 function cancelSentiment()
 {
