@@ -7,8 +7,14 @@
           <tr><td id="wave" class="showfocus"><img src="./images/tjbot2.jpg" width="200"><br/>Wave</td><td>None</td><td>Wave tjBot's arm</td></tr>
           <tr><td id="sentiment" class="showfocus"><span id="sentiment_icon"><img src="./images/sentiment.png" width="200"></span><br/>Check Sentiment</td><td>None (perhaps later pick a topic)</td><td>Perform Sentiment Analysis in Twitter<br/>Perhaps add code to send feedback back to browser on what TJBot is currently doing. </td></tr>
           <tr><td id="conversation" class="showfocus"><img src="./images/conversation.png" width="200"><br/>Have a Conversation</td><td>None (perhaps later pick a conversation)</td><td>Use microphone and speaker on tjBot to converse<br/>Add support to echo conversation to browser<br/>Add code to change led color based on ready to listen or talking. Need to change speaker to USB to do this.</td></tr>
-          <tr><td id="color" ><img src="./images/changeColor.jpg" width="200"><br/>Change LED Color with your voice</td><td>None </td><td>Use microphone on tjBot to change the color of the LED</td></tr>
+          <tr><td id="color" class="showfocus"><img src="./images/changeColor.jpg" width="200"><br/>Change LED Color with your voice</td><td>None </td><td>Use microphone on tjBot to change the color of the LED</td></tr>
           <tr><td id="factoid" class="disabled"><img src="./images/tjbot_orange_glasses.jpg" width="200"><br/>Factoids</td><td>None </td><td>Use microphone and speaker on tjBot to get facts about famous people</td></tr>
+          <tr><td id="stream" colspan="3" class="showfocus">
+            <video width="800" height="600" controls>
+              <source src="tcp://192.168.85.30:3333" type="video/mp4">
+              <source src="tcp://192.168.85.30:3333" type="video/ogg">
+            Your browser does not support the video tag.
+            </video></td></tr>
         </table>
     </div>
     <div class="scrollingPaneRight">

@@ -26,7 +26,7 @@ var Twitter = require('twitter');
 var config = require('../../env.json');
 var intervalID;
 
-var tjConversation = new TJBot(['microphone', 'speaker', 'servo'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
+var tjConversation = new TJBot(['microphone', 'speaker', 'servo', 'led'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
 var tjServo = new TJBot(['servo'], {log: {level: 'debug'}}, {});
 var tjLED = new TJBot(['led'], {log: {level: 'debug'}}, {});
 var tjSentiment = new TJBot(['led'], {log: {level: 'verbose'}}, config);
@@ -45,7 +45,7 @@ var TWEETS = [];
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
-var WORKSPACEID = config.conversations.factoidWorkspace;
+var FACTOID = config.conversations.factoidWorkspace;
 var tjColors = tjColorControl.shineColors();
 var colors = {}; tjColors.forEach(function(color) { colors[color] = 1; });
 
