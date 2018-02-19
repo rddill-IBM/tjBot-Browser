@@ -122,10 +122,12 @@ exports.getColors = function(req, res, next)
  */
 exports.sentiment = function(req, res, next)
 {
-    res.send({"results": "Request to perform sentiment analysis received."});
+    var _topic = req.body.topic;
+    if (_topic === '') {_topic = 'education'; console.log('no topic received, defaulting to education');}
+    res.send({"results": "Request to perform sentiment analysis on '"+_topic+"' received."});
         // monitor twitter
         console.log('monitoring twitter');
-        twitter.stream('statuses/filter', {track: SENTIMENT_KEYWORD }, function(stream) {
+        twitter.stream('statuses/filter', {track: _topic }, function(stream) {
             stream.on('data', function(event) {
                 if (event && event.text) {
                     var tweet = event.text;

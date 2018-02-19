@@ -89,6 +89,8 @@ function runSentiment()
     if (!bSentiment)
     {
         var options = {};
+        options.topic = $("#sentiment_topic").val();
+        console.log('options.topic: '+options.topic);
         sentiment_icon.empty(); sentiment_icon.append('<img src="./icons/stop.png" width="200">')
         $.when($.post('/tjBot/sentiment', options)).done(function(_res)
         {rh_panel.empty(); rh_panel.append(_res.results); bSentiment = true;});
