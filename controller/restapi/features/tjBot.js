@@ -41,7 +41,7 @@ var twitter = new Twitter({
     access_token_key: twitterCreds.access_token_key,
     access_token_secret: twitterCreds.access_token_secret
 });
-var TWEETS = [];
+var TWEETS;
 var MAX_TWEETS = 100;
 var CONFIDENCE_THRESHOLD = 0.5;
 var WORKSPACEID = config.conversations.workspace;
@@ -122,6 +122,7 @@ exports.getColors = function(req, res, next)
  */
 exports.sentiment = function(req, res, next)
 {
+    TWEETS = [];
     SENTIMENT_KEYWORD = req.body.topic;
     if (SENTIMENT_KEYWORD === '') {SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword; console.log('no topic received, defaulting to education');}
     res.send({"results": "Request to perform sentiment analysis on '"+SENTIMENT_KEYWORD+"' received."});
