@@ -123,7 +123,7 @@ exports.getColors = function(req, res, next)
 exports.sentiment = function(req, res, next)
 {
     SENTIMENT_KEYWORD = req.body.topic;
-    if (_topic === '') {_topic = 'education'; console.log('no topic received, defaulting to education');}
+    if (SENTIMENT_KEYWORD === '') {SENTIMENT_KEYWORD = twitterCreds.sentiment_keyword; console.log('no topic received, defaulting to education');}
     res.send({"results": "Request to perform sentiment analysis on '"+SENTIMENT_KEYWORD+"' received."});
         // monitor twitter
         console.log('monitoring twitter');
