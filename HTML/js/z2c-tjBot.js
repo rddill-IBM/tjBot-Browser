@@ -58,8 +58,6 @@ function initTJBot()
     $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
     
-//    stream = $("#videoStream");
-//    stream.src = 'http://localhost:8090/feed1.ffm';
 }
 
 function runLights(_pattern)
