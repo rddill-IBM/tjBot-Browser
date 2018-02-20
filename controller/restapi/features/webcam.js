@@ -27,6 +27,7 @@ var http = require('http');
 var webSocket = require('websocket');
 var socketAddr = "9876";
 var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr)});
+var util = require('./Z2B_Utilities');
 
  
 var stream = raspividStream();
@@ -35,8 +36,10 @@ exports.getWebCam = function(req, res, next)
 {
     
     // To stream over websockets: 
-var videoStream = raspividStream();
-videoStream.on('data', function(data) {
+    console.log(ws);
+    util.displayObjectProperties(ws);
+    var videoStream = raspividStream();
+    videoStream.on('data', function(data) {
         ws.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
         res.send('getWebCam processing');       
