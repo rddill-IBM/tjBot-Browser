@@ -41,6 +41,7 @@ var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr
     });
 
     var video = raspivid();
+    console.log(video.server);
     util.displayObjectProperties('video.server', video.server);
     util.displayObjectValues('video.server', video.server);
  
