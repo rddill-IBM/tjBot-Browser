@@ -46,9 +46,8 @@ var stream = raspividStream();
 exports.getWebCam = function(req, res, next)
 {
 
-    var file = fs.createWriteStream('http://0.0.0.0:8090');
     var video = raspivid();
-    video.pipe(file);
+    video.pipe(cs);
 
     /*
     var videoStream = raspividStream();
