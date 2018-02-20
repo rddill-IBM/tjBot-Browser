@@ -25,6 +25,7 @@ var flasher;
 var rh_panel;
 var bSentiment = false;
 var canvasFrame, context, FPS, stream;
+var socketAddr = "http://192.168.85.26:9876";
 
 function initTJBot()
 {
@@ -45,10 +46,13 @@ function initTJBot()
     LEDcolor.on('click', function(){runControlLED();});
     setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('<img src="./images/flasher.jpg" width="200">') }, 3000)
     FPS = 30;
+    canvasFrame = $('#videoInput');
     console.log('initiating post request to /tjBot/getWebCam')
     $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
-
+    var wsavc = new WSAvcPlayer(canvasFrame, "webgl");
+ 
+    wsavc.connect(socketAddr);
     
 }
 

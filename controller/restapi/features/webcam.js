@@ -22,13 +22,23 @@ var request = require('request');
 var rl = require('readline-sync');
 var sleep = require('sleep');
 var config = require('../../env.json');
-var ffmpeg = require('fluent-ffmpeg');
+var raspividStream = require('raspivid-stream');
+var http = require('http');
+var webSocket = require('websocket');
+var socketAddr = "9876";
+var ws = new ws.server({httpServer: http.createServer().listen(socketAddr)});
+
+ 
+var stream = raspividStream();
+ 
 exports.getWebCam = function(req, res, next)
 {
     
-    ffmpeg.ffprobe('/dev/zero', function(err, metadata) { if (err) {console.log('/dev/zero: ',err)} else {console.dir('/dev/zero: ',metadata); }});
-
-    res.send('getWebCam processing');       
+    // To stream over websockets: 
+    videoStream.on('data', function(data) {
+        ws.send(data, { binary: true }, function (error) { if (error) console.error(error); });
+    });
+        res.send('getWebCam processing');       
     /*
     raspivid -o - -t 0 -vf -hf -fps 10 -b 500000 | ffmpeg -re -ar 44100 -ac 2 -acodec pcm_s16le -f s16le -ac 2 -i /dev/zero -f h264 -i - -vcodec copy -acodec aac -ab 128k -g 50 -strict experimental -f mp4 rtmp://localhost:9876
     var proc = ffmpeg('/dev/video0')
