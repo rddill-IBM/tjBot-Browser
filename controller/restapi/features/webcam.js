@@ -33,11 +33,9 @@ var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr
     {
         cs = request.accept(null, request.origin);
         cs.on('message', function(message)
-        {
-            console.log(message.utf8Data);
-            cs.sendUTF('connected');
-            cs.on('close', function(m_connection) {console.log('m_connection closed'); });
-        });
+        { console.log('message received: '+message.utf8Data); cs.sendUTF('connected'); });
+        cs.on('close', function(m_connection) {console.log('connection closed'); });
+        cs.on('data', function(m_connection) {console.log('data received', data);});
     });
 
  
