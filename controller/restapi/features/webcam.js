@@ -27,16 +27,17 @@ var raspividStream = require('raspivid-stream');
 var http = require('http');
 var webSocket = require('websocket');
 var socketAddr = "9876";
+var cs;
 var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr)});
     util.displayObjectProperties('ws', ws);
     ws.on('request', function(request) 
     {
-        ws = request.accept(null, request.origin);
-        ws.on('message', function(message)
+        cs = request.accept(null, request.origin);
+        cs.on('message', function(message)
         {
             console.log(message.utf8Data);
-            ws.sendUTF('connected');
-            ws.on('close', function(m_connection) {console.log('m_connection closed'); });
+            cs.sendUTF('connected');
+            cs.on('close', function(m_connection) {console.log('m_connection closed'); });
         });
     });
 
@@ -45,13 +46,14 @@ var stream = raspividStream();
  
 exports.getWebCam = function(req, res, next)
 {
-    
+    util.displayObjectProperties('cs', cs);
+
     // To stream over websockets: 
     console.log(ws);
     var videoStream = raspividStream();
 
     videoStream.on('data', function(data) {
-        ws.send(data, { binary: true }, function (error) { if (error) console.error(error); });
+        cs.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
         res.send('getWebCam processing');       
     /*
