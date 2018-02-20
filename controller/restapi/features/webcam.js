@@ -29,7 +29,6 @@ var webSocket = require('websocket');
 var socketAddr = "9876";
 var cs;
 var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr)});
-    util.displayObjectProperties('ws', ws);
     ws.on('request', function(request) 
     {
         cs = request.accept(null, request.origin);
@@ -46,12 +45,8 @@ var stream = raspividStream();
  
 exports.getWebCam = function(req, res, next)
 {
-    util.displayObjectProperties('cs', cs);
-
-    // To stream over websockets: 
-    console.log(ws);
     var videoStream = raspividStream();
-
+    util.displayObjectProperties('raspividStream', raspividStream);
     videoStream.on('data', function(data) {
         cs.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
