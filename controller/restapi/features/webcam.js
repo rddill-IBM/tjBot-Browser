@@ -42,7 +42,7 @@ var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr
 
     var video = raspivid();
     util.displayObjectProperties('video', video);
-
+    video.on('data', function(data) {console.log('video data received'); cs.send(data);});
 var stream = raspividStream();
  
 exports.getWebCam = function(req, res, next)
