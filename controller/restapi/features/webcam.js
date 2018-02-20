@@ -26,7 +26,7 @@ var ffmpeg = require('fluent-ffmpeg');
 exports.getWebCam = function(req, res, next)
 {
     
-    ffmpeg.ffprobe('/raw/rawctl1', function(err, metadata) { if (err) {console.log('/raw/rawctl1: ',err)} else {console.dir('/raw/rawctl1: ',metadata); }});
+    ffmpeg.ffprobe('/raw/rawctl', function(err, metadata) { if (err) {console.log('/raw/rawctl: ',err)} else {console.dir('/raw/rawctl: ',metadata); }});
 
     res.send('getWebCam processing');       
     /*
