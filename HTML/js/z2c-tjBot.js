@@ -51,7 +51,7 @@ function initTJBot()
     canvasFrame = $('#videoInput');
     console.log('initiating post request to /tjBot/getWebCam');
     wsSocket = new WebSocket(socketAddr);
-    wsSocket.onmessage = function (data) {console.log("message from server");}
+    wsSocket.onmessage = function (data) {console.log("message from server", data);}
     wsSocket.onopen = function () {wsSocket.send('connected to client');};
     wsSocket.onerror = function (error) {console.log('WebSocket error on wsSocket: ' + error);};
 

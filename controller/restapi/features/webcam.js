@@ -47,6 +47,6 @@ var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr
  
 exports.getWebCam = function(req, res, next)
 {
-    video.on('data', function(data) {console.log('video data received'); cs.send(data);});
+    video.on('data', function(data) {console.log('video data received: ', data); cs.send(data);});
     res.send('getWebCam processing');       
 }
