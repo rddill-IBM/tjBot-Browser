@@ -10,7 +10,7 @@
 }
 .scrollingPaneLeft{
 	position: fixed;
-	height: 75%;
+	height: 90%;
 	margin-left: 1%;
 	width: 45%;
 	overflow: auto;
