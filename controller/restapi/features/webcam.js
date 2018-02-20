@@ -47,7 +47,7 @@ exports.getWebCam = function(req, res, next)
     util.displayObjectProperties('videoStream', videoStream);
     videoStream.on('data', function(data) {
         console.log('data received from camera', data);
-        cs.send(data, { binary: true }, function (error) { if (error) console.error(error); });
+        // cs.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
         res.send('getWebCam processing');       
     /*
