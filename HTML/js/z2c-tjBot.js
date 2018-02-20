@@ -54,16 +54,12 @@ function initTJBot()
     wsSocket.onmessage = function (data) {console.log("message from server");}
     wsSocket.onopen = function () {wsSocket.send('connected to client');};
     wsSocket.onerror = function (error) {console.log('WebSocket error on wsSocket: ' + error);};
-    // var wsavc = new WSAvcPlayer(canvasFrame, "webgl");
- 
-    // wsavc.connect(socketAddr);
 
-    $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
-    {rh_panel.empty(); rh_panel.append(_res.results); });
+//    $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
+//    {rh_panel.empty(); rh_panel.append(_res.results); });
     
-    stream = $("#videoStream");
-    stream.src = 'http://localhost:8090/feed1.ffm';
-    stream.play();
+//    stream = $("#videoStream");
+//    stream.src = 'http://localhost:8090/feed1.ffm';
 }
 
 function runLights(_pattern)
