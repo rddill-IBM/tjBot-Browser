@@ -48,7 +48,7 @@ exports.getWebCam = function(req, res, next)
     var videoStream = raspividStream();
     util.displayObjectProperties('videoStream', videoStream);
     videoStream.on('data', function(data) {
-        console.log('data received from camera');
+        console.log('data received from camera', data);
         cs.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
         res.send('getWebCam processing');       
