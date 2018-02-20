@@ -22,6 +22,7 @@ var images = require('./features/images');
 var conversations = require('./features/conversations');
 var format = require('date-format');
 var tjBot = require('./features/tjBot');
+var webCam = require('./features/webcam');
 
 var count = 0;
 router.use(function(req, res, next) {
@@ -50,6 +51,7 @@ router.post( '/api/response', conversations.response);
 router.post( '/api/train', conversations.train);
 router.get( '/api/getAllRecords', conversations.getAllRecords);
 
+
 router.post('/tjBot/wave', tjBot.wave);
 router.post('/tjBot/cycleLight', tjBot.cycleLight);
 router.post('/tjBot/sentiment', tjBot.sentiment);
@@ -57,3 +59,5 @@ router.post('/tjBot/conversation', tjBot.conversation);
 router.post('/tjBot/factoid', tjBot.factoid);
 router.post('/tjBot/cancelSentiment', tjBot.cancelSentiment);
 router.post('/tjBot/controlLED', tjBot.controlLED);
+
+router.post('/tjBot/getWebCam', webCam.getWebCam);

@@ -24,6 +24,7 @@ var TJBot = require('tjbot');
 var sleep = require('sleep');
 var Twitter = require('twitter');
 var config = require('../../env.json');
+var ffmpeg = require('fluent-ffmpeg');
 var intervalID;
 
 var tjConversation = new TJBot(['microphone', 'speaker', 'servo', 'led'], {log: {level: 'debug'}}, {"conversation": config.conversations, "speech_to_text": config.speech_to_text, "text_to_speech": config.text_to_speech});
@@ -146,7 +147,7 @@ exports.sentiment = function(req, res, next)
             });
     
             stream.on('error', function(error) {
-                console.log("\nAn error has occurred while connecting to Twitter. Please check your twitter credentials, and also refer to https://dev.twitter.com/overview/api/response-codes for more information on Twitter error codes.\n");
+                console.log("\nAn error has occurred while connecting to Twitter. Please check your twitter credentials, and also refer to https://dev.twitter.com/overview/api/response-codes for more information on Twitter error codes.\n", error);
                 throw error;
             });
         });
@@ -286,3 +287,30 @@ exports.controlLED = function(req, res, next)
         }
     });
     }
+exports.getWebCam = function(req, res, next)
+{
+    
+    ffmpeg.ffprobe('/dev/video0', function(err, metadata) { console.dir('/dev/video0: ',metadata); });
+    ffmpeg.ffprobe('/dev/video1', function(err, metadata) { console.dir('/dev/video1: ',metadata); });
+    /*
+    var proc = ffmpeg('/dev/video0')
+                //.format('h264')
+                .inputOptions([
+                    '-f v4l2',
+                    '-framerate 25',
+                    '-video_size 300x200'
+                ])
+                .outputOptions([
+                    '-f rtsp',
+                    '-rtsp_transport tcp',
+                    'rtsp://localhost:7002/live.sdp'
+                ])
+                //.output('rtsp://localhost:7002/live.sdp')
+                .on('end',function(msg){
+                    console.log("finish ffmpeg command " + msg);
+                })
+                .on('err',function(err){
+                    console.log("error found " + err);
+                });
+                */
+}

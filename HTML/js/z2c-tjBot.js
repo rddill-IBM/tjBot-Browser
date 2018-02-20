@@ -24,6 +24,7 @@ var conversation, factoid;
 var flasher;
 var rh_panel;
 var bSentiment = false;
+var canvasFrame, context, FPS, stream;
 
 function initTJBot()
 {
@@ -43,6 +44,12 @@ function initTJBot()
     // factoid.on('click', function(){runFactoid();});
     LEDcolor.on('click', function(){runControlLED();});
     setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('<img src="./images/flasher.jpg" width="200">') }, 3000)
+    FPS = 30;
+
+    $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
+    {rh_panel.empty(); rh_panel.append(_res.results); });
+
+    
 }
 
 function runLights(_pattern)
@@ -104,4 +111,12 @@ function cancelSentiment()
     {
         sentiment_icon.empty(); sentiment_icon.append('<img src="./images/sentiment.png" width="200">')
         rh_panel.empty(); rh_panel.append(_res.results); });
+}
+
+function processVideo()
+{
+    var video = $("#videoInput")[0]; // video is the id of video tag
+        console.log(stream);
+        video.srcObject = stream;
+        video.play();
 }
