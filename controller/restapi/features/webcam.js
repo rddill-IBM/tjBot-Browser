@@ -26,7 +26,7 @@ var raspividStream = require('raspivid-stream');
 var http = require('http');
 var webSocket = require('websocket');
 var socketAddr = "9876";
-var ws = new ws.server({httpServer: http.createServer().listen(socketAddr)});
+var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr)});
 
  
 var stream = raspividStream();
