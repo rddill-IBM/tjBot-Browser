@@ -45,7 +45,7 @@ function initTJBot()
     LEDcolor.on('click', function(){runControlLED();});
     setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('<img src="./images/flasher.jpg" width="200">') }, 3000)
     FPS = 30;
-
+    console.log('initiating post request to /tjBot/getWebCam')
     $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
     {rh_panel.empty(); rh_panel.append(_res.results); });
 
