@@ -26,7 +26,7 @@ var rh_panel;
 var bSentiment = false;
 var canvasFrame, context, FPS, stream;
 var socketAddr = "ws://192.168.85.26:9876";
-var wsSocket = new WebSocket(socketAddr);
+var wsSocket;
 
 
 function initTJBot()
@@ -49,8 +49,9 @@ function initTJBot()
     setTimeout(function (){console.log('stopping flasher'); flasher.empty(); flasher.append('<img src="./images/flasher.jpg" width="200">') }, 3000)
     FPS = 30;
     canvasFrame = $('#videoInput');
-    console.log('initiating post request to /tjBot/getWebCam')
-    wsSocket.onmessage(function(data){console.log("message from server");});
+    console.log('initiating post request to /tjBot/getWebCam');
+    wsSocket = new WebSocket(socketAddr);
+    wsSocket.onmessage = function (data) {console.log("message from server");}
     wsSocket.onopen = function () {wsSocket.send('connected to client');};
     wsSocket.onerror = function (error) {console.log('WebSocket error on wsSocket: ' + error);};
     // var wsavc = new WSAvcPlayer(canvasFrame, "webgl");
