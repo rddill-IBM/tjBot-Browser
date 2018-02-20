@@ -35,7 +35,8 @@ exports.getWebCam = function(req, res, next)
 {
     
     // To stream over websockets: 
-    raspividStream.on('data', function(data) {
+var videoStream = raspividStream();
+videoStream.on('data', function(data) {
         ws.send(data, { binary: true }, function (error) { if (error) console.error(error); });
     });
         res.send('getWebCam processing');       
