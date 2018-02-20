@@ -55,8 +55,15 @@ function initTJBot()
     wsSocket.onopen = function () {wsSocket.send('connected to client');};
     wsSocket.onerror = function (error) {console.log('WebSocket error on wsSocket: ' + error);};
 
-    $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
-    {rh_panel.empty(); rh_panel.append(_res.results); });
+    setTimeout(function() 
+    { 
+        $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
+        {
+            rh_panel.empty(); 
+            rh_panel.append(_res.results); 
+        }); 
+    }, 2000);
+    
     
 }
 
