@@ -26,10 +26,11 @@ var ffmpeg = require('fluent-ffmpeg');
 exports.getWebCam = function(req, res, next)
 {
     
-    ffmpeg.ffprobe('/dev/raw/rawctl', function(err, metadata) { if (err) {console.log('/dev/raw/rawctl: ',err)} else {console.dir('/dev/raw/rawctl: ',metadata); }});
+    ffmpeg.ffprobe('/dev/zero', function(err, metadata) { if (err) {console.log('/dev/zero: ',err)} else {console.dir('/dev/zero: ',metadata); }});
 
     res.send('getWebCam processing');       
     /*
+    raspivid -o - -t 0 -vf -hf -fps 10 -b 500000 | ffmpeg -re -ar 44100 -ac 2 -acodec pcm_s16le -f s16le -ac 2 -i /dev/zero -f h264 -i - -vcodec copy -acodec aac -ab 128k -g 50 -strict experimental -f mp4 rtmp://localhost:9876
     var proc = ffmpeg('/dev/video0')
                 //.format('h264')
                 .inputOptions([
