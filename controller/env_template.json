@@ -1,0 +1,48 @@
+
+  "speech_to_text": {
+    "version": "v1",
+    "url": "https://stream.watsonplatform.net/speech-to-text/api",
+    "password": "Your-Password-Goes-Here",
+    "username": "Your-Username-Goes-Here"
+    },
+
+    "text_to_speech": {
+        "version": "v1",
+        "url": "https://stream.watsonplatform.net/text-to-speech/api",
+        "password": "Your-Password-Goes-Here",
+        "username": "Your-Username-Goes-Here"
+      },
+
+      "visual_recognition": {
+          "url": "https://gateway-a.watsonplatform.net/visual-recognition/api",
+          "note": "It may take up to 5 minutes for this key to become active",
+          "api_key": "Your-api_key-Goes-Here",
+          "classifier_id": "Your-classifier_id-Goes-Here"
+        },
+        "conversations": {
+          "url": "https://gateway.watsonplatform.net/conversation/api",
+          "password": "Your-Password-Goes-Here",
+          "username": "Your-Username-Goes-Here",
+          "workspace": "Your-workspace-id-Goes-Here",
+          "factoidWorkspace": "Your-workspace-id-for-factoids-Goes-Here"
+        },
+        "tone_analyzer": 
+        {
+            "password": "Your-Password-Goes-Here",
+            "username": "Your-Username-Goes-Here"
+          },
+        "twitter": 
+        {
+            "consumer_key": "Your-consumer_key-Goes-Here",
+            "consumer_secret": "Your-consumer_secret-Goes-Here",
+            "access_token_key": "Your-access_token_key-Goes-Here",
+            "access_token_secret": "Your-access_token_secret-Goes-Here",
+            "sentiment_analysis_frequency_sec": "30",
+            "sentiment_keyword": "education"
+        },
+    "sessionSecret" : "Your-sessionSecret-Goes-Here", 
+    "tj": {
+      "name": "Your-tjbot-Name-Goes-Here"
+    },
+    "db": "Your-conversation-db-name-Goes-Here-if-you-record-conversations"
+}
