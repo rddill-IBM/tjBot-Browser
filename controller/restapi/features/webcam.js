@@ -23,8 +23,8 @@ var rl = require('readline-sync');
 var sleep = require('sleep');
 var config = require('../../env.json');
 var util = require('./Z2B_Utilities').Z2B_Utility;
-var raspividStream = require('raspivid-stream');
-var raspivid = require('raspivid');
+// var raspividStream = require('raspivid-stream');
+// var raspivid = require('raspivid');
 var fs = require('fs');
 var http = require('http');
 var webSocket = require('websocket');
@@ -40,13 +40,13 @@ var ws = new webSocket.server({httpServer: http.createServer().listen(socketAddr
         cs.on('data', function(m_connection) {console.log('data received', data);});
     });
 
-    var video = raspivid();
-    console.log(video.server);
-    util.displayObjectProperties('video.server', video.server);
-    util.displayObjectValues('video.server', video.server);
+//    var video = raspivid();
+//    console.log(video.server);
+//    util.displayObjectProperties('video.server', video.server);
+//    util.displayObjectValues('video.server', video.server);
  
 exports.getWebCam = function(req, res, next)
 {
-    video.on('data', function(data) {console.log('video data received: ', data); cs.send(data);});
+//    video.on('data', function(data) {console.log('video data received: ', data); cs.send(data);});
     res.send('getWebCam processing');       
 }

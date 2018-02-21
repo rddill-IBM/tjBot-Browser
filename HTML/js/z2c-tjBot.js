@@ -51,13 +51,11 @@ function initTJBot()
     canvasFrame = $('#videoInput');
     console.log('initiating post request to /tjBot/getWebCam');
     wsSocket = new WebSocket(socketAddr);
-    wsSocket.onmessage = function (data) 
-    {
-        console.log("message from server", data.data);
-    }
+    wsSocket.onmessage = function (data)  {console.log("message from server", data.data); }
     wsSocket.onopen = function () {wsSocket.send('connected to client');};
     wsSocket.onerror = function (error) {console.log('WebSocket error on wsSocket: ' + error);};
 
+    // need to wait a moment until the web socket processing has completed before issuing the getWebCam request
     setTimeout(function() 
     { 
         $.when($.post('/tjBot/getWebCam', {})).done(function(_res)
@@ -66,8 +64,6 @@ function initTJBot()
             rh_panel.append(_res.results); 
         }); 
     }, 2000);
-    
-    
 }
 
 function runLights(_pattern)
@@ -133,8 +129,5 @@ function cancelSentiment()
 
 function processVideo()
 {
-    var video = $("#videoInput")[0]; // video is the id of video tag
-        console.log(stream);
-        video.srcObject = stream;
-        video.play();
+// Code to support streaming video goes here.
 }
